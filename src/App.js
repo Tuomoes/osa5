@@ -6,6 +6,7 @@ import loginService from './services/login'
 import Notification from './components/Notification'
 import './App.css'
 import Togglable from './components/Togglable'
+import blogs from './services/blogs';
 
 class App extends React.Component {
     constructor(props) {
@@ -71,6 +72,26 @@ class App extends React.Component {
 
     }
 
+    createBlog = async (blogObject) => {
+        console.log('create button clicked')
+        const responseData = await blogs.createNew(blogObject)
+        const blogsExtended = this.state.blogs.concat(responseData)
+        this.setState({blogs: blogsExtended})
+    }
+
+    addLike = async (blogId) => {
+        console.log('like called from base app', blogId)
+        const editedBlog = await blogs.addLike(blogId)
+        console.log('like request done')
+        console.log('editedBlog:', editedBlog)
+        const updatedBlogs = this.state.blogs.map((item) => {
+            if (item._id === editedBlog._id) return editedBlog
+            else return item
+        })
+        console.log('updatedBlogs is:', updatedBlogs)
+        this.setState({blogs: updatedBlogs})
+    }
+
     render() {
         if (this.state.user === null) {
             return (
@@ -108,10 +129,10 @@ class App extends React.Component {
                     {this.state.user.name + " logged in"} <button onClick={this.logout}>logout</button>
                 </p>
                 <Togglable.Togglable buttonLabel="create blog">
-                    <BlogForm/>
+                    <BlogForm createBlog={this.createBlog}/>
                 </Togglable.Togglable>
                 {this.state.blogs.map(blog =>
-                    <Blog key={blog._id} blog={blog} />
+                    <Blog key={blog._id} id={blog._id} blog={blog} addLike={this.addLike}/>
                 )}
             </div>
         )

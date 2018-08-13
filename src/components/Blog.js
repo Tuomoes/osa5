@@ -1,5 +1,6 @@
 import React from 'react'
 import Linkify from 'react-linkify'
+import blogsService from '../services/blogs'
 
 
 class Blog extends React.Component {
@@ -10,7 +11,7 @@ class Blog extends React.Component {
         }
     }
 
-    clickLogger = (blog) => {
+    expandBlog = (blog) => {
         return () => {
             console.log('clickidi-click!! says:' + blog.author)
             this.toggleVisibility()
@@ -44,13 +45,13 @@ class Blog extends React.Component {
 
         return (
             <div>
-                <div onClick={this.clickLogger(this.props.blog)}>
+                <div onClick={this.expandBlog(this.props.blog)}>
                     {this.props.blog.title} {this.props.blog.author}
                 </div>
                 <div style={showWhenVisible}>
                     <div style={extraInfoStyle}>
                         <div> <Linkify properties={{target: '_blank'}}> {this.props.blog.url} </Linkify> </div>
-                        <div> {this.props.blog.likes} likes <button>like</button> </div>
+                        <div> {this.props.blog.likes} likes <button onClick={() => this.props.addLike(this.props.id)}>like</button> </div>
                         <div> added by {this.user()}</div>
                     </div>
                 </div>

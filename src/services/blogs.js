@@ -20,4 +20,21 @@ const createNew = (blogObject) => {
     return request.then(response => response.data)
 }
 
-export default { getAll, setToken, createNew }
+const addLike = async (blogId) => {
+    const blog = (await axios.get(baseUrl + '/' + blogId).then(response => response.data))[0]
+    console.log('get call blog:', blog)
+    const likedBlog = {
+        user: blog.user._id,
+        likes: blog.likes + 1,
+        author: blog.author,
+        title: blog.title,
+        url: blog.url
+    }
+    const config = {
+        headers: {'Authorization': token}
+    }
+    const request = axios.put(baseUrl + '/' + blogId, likedBlog, config)
+    return request.then(response => response.data)
+}
+
+export default { getAll, setToken, createNew, addLike }

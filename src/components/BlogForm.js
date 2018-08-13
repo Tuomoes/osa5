@@ -1,5 +1,4 @@
 import React from 'react'
-import blogsService from '../services/blogs'
 import Notification from '../components/Notification'
 
 class BlogForm extends React.Component {
@@ -15,14 +14,12 @@ class BlogForm extends React.Component {
 
     createBlog = (event) => {
         event.preventDefault()
-        console.log('create button clicked')
         const blogObject = {
             title: this.state.title,
             author: this.state.author,
             url: this.state.url
         }
-        
-        blogsService.createNew(blogObject)
+        this.props.createBlog(blogObject)
         const infotext = 'a new blog \'' + this.state.title + '\' by ' + this.state.author + ' added'
         this.setState({title: '', author: '', url: '', info: infotext})
         setTimeout(() => {

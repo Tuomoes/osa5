@@ -53,6 +53,7 @@ class Blog extends React.Component {
                         <div> <Linkify properties={{target: '_blank'}}> {this.props.blog.url} </Linkify> </div>
                         <div> {this.props.blog.likes} likes <button onClick={() => this.props.addLike(this.props.id)}>like</button> </div>
                         <div> added by {this.user()}</div>
+                        <div> <button onClick={() => this.props.deleteBlog(this.props.id)}>delete</button> </div>
                     </div>
                 </div>
             </div>

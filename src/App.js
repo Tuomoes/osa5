@@ -92,6 +92,27 @@ class App extends React.Component {
         this.setState({blogs: updatedBlogs})
     }
 
+    deleteBlog = async (blogId) => {
+        const bTitle = this.state.blogs.find(blog => {return blog._id === blogId}).title
+        const bAuthor = this.state.blogs.find(blog => {return blog._id === blogId}).author
+        console.log('title & author', bTitle, bAuthor)
+        if (window.confirm('delete \'' + bTitle + '\' by ' + bAuthor + ' ?'))
+        {
+            try {
+                console.log('delete method called')
+                const response = await blogs.deleteBlog(blogId)
+                console.log('delete response is:', response)
+            }
+            catch (error) {
+                console.log('delete failed.')
+                return
+            }
+            const updatedBlogs = this.state.blogs.filter(blog => {return blog._id !== blogId})
+            console.log('updatedBlogs is', updatedBlogs)
+            this.setState({blogs: updatedBlogs})
+        }
+    }
+
     render() {
         if (this.state.user === null) {
             return (
@@ -132,7 +153,7 @@ class App extends React.Component {
                     <BlogForm createBlog={this.createBlog}/>
                 </Togglable.Togglable>
                 {this.state.blogs.sort((a, b) => {return b.likes - a.likes}).map(blog =>
-                    <Blog key={blog._id} id={blog._id} blog={blog} addLike={this.addLike}/>
+                    <Blog key={blog._id} id={blog._id} blog={blog} addLike={this.addLike} deleteBlog={this.deleteBlog}/>
                 )}
             </div>
         )

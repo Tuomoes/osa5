@@ -36,5 +36,4 @@ describe.only('<SimpleBlog />', () => {
 
         expect(mockHandler.mock.calls.length).toBe(2)
     })
-
 })

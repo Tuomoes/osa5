@@ -46,13 +46,13 @@ class Blog extends React.Component {
 
         return (
             <div>
-                <div onClick={this.expandBlog(this.props.blog)}>
+                <div onClick={this.expandBlog(this.props.blog)} className="nameDiv">
                     {this.props.blog.title} {this.props.blog.author}
                 </div>
-                <div style={showWhenVisible}>
-                    <div style={extraInfoStyle}>
+                <div style={showWhenVisible} className="contentDiv">
+                    <div style={extraInfoStyle} className="styleDiv">
                         <div> <Linkify properties={{target: '_blank'}}> {this.props.blog.url} </Linkify> </div>
-                        <div> {this.props.blog.likes} likes <button onClick={() => this.props.addLike(this.props.id)}>like</button> </div>
+                        <div className="likesDiv"> {this.props.blog.likes} likes <button onClick={() => this.props.addLike(this.props.id)}>like</button> </div>
                         <div> added by {this.user()}</div>
                         <div> 
                             {(this.props.blog.user === undefined || this.props.user.username === this.props.blog.user.username) ?
@@ -66,6 +66,7 @@ class Blog extends React.Component {
 }
 
 Blog.propTypes = {
+    id: PropTypes.string.isRequired,
     blog: PropTypes.object.isRequired, 
     user: PropTypes.object.isRequired, 
     addLike: PropTypes.func.isRequired, 

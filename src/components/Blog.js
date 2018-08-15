@@ -1,6 +1,7 @@
 import React from 'react'
 import Linkify from 'react-linkify'
 import blogsService from '../services/blogs'
+import PropTypes from 'prop-types'
 
 
 class Blog extends React.Component {
@@ -63,5 +64,13 @@ class Blog extends React.Component {
         )
     }
 }
+
+Blog.propTypes = {
+    blog: PropTypes.object.isRequired, 
+    user: PropTypes.object.isRequired, 
+    addLike: PropTypes.func.isRequired, 
+    deleteBlog: PropTypes.func.isRequired
+}
+
 
 export default Blog

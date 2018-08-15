@@ -153,7 +153,7 @@ class App extends React.Component {
                     <BlogForm createBlog={this.createBlog}/>
                 </Togglable.Togglable>
                 {this.state.blogs.sort((a, b) => {return b.likes - a.likes}).map(blog =>
-                    <Blog key={blog._id} id={blog._id} blog={blog} addLike={this.addLike} deleteBlog={this.deleteBlog}/>
+                    <Blog key={blog._id} id={blog._id} blog={blog} user={this.state.user} addLike={this.addLike} deleteBlog={this.deleteBlog}/>
                 )}
             </div>
         )

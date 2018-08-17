@@ -118,8 +118,8 @@ class App extends React.Component {
             return (
                 <div>
                     <Notification.Notification message={this.state.error} messageStyle="error-pop-up"/>
-                    <h2>Login to application</h2>
-                    <form>
+                    <h2 className="loginTitle">Login to application</h2>
+                    <form className="loginForm">
                         <div>
                             username:
                             <input
@@ -127,6 +127,7 @@ class App extends React.Component {
                                 name="username"
                                 value={this.state.username}
                                 onChange={this.handleLoginFieldChange}
+                                className="usernameField"
                             />
                         </div>
                         <div>
@@ -135,10 +136,11 @@ class App extends React.Component {
                                 type="password"
                                 name="password"
                                 value={this.state.password}
-                                onChange={this.handleLoginFieldChange}    
+                                onChange={this.handleLoginFieldChange}
+                                className="passwordField"   
                             />
                         </div>
-                        <button onClick={this.login}>Login</button>
+                        <button onClick={this.login} className="loginButton">Login</button>
                     </form>
                 </div>
             )

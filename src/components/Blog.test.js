@@ -53,7 +53,6 @@ describe.only('<Blog />', () => {
 
         nameDiv.simulate('click')
         
-        //const contentDiv = blogComponent.find('.contentDiv')
         const contentDiv = blogComponent.find('.contentDiv')
         expect(contentDiv.getElement().props.style).toEqual({display: ''})
         

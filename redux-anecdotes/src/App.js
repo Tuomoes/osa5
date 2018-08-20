@@ -14,7 +14,7 @@ class App extends React.Component {
             </div>
             <div>
               has {anecdote.votes}
-              <button>vote</button>
+              <button onClick={this.vote(anecdote.id, this.props.store)}>vote</button>
             </div>
           </div>
         )}
@@ -25,6 +25,13 @@ class App extends React.Component {
         </form>
       </div>
     )
+  }
+
+  vote = (id, store) => () => {
+      store.dispatch({
+          type: 'VOTE',
+          data: { id }
+      })
   }
 }
 
